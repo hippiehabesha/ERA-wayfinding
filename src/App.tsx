@@ -6,6 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import List from "./list";
+import BlockList from "./Lists/block_list";
+import SearchList from "./Lists/search_list";
 import "./App.css";
 
 const backgrounds = [
@@ -34,7 +36,7 @@ function Home() {
   };
 
   const handleSearch = () => {
-    alert(`Searching for: ${searchTerm}`);
+    navigate("/list/search", { state: { searchTerm } });
   };
 
   const handleLocationClick = () => {
@@ -47,6 +49,10 @@ function Home() {
 
   const handleListRedirect = () => {
     navigate("/list");
+  };
+
+  const handleBlockListRedirect = () => {
+    navigate("/list/block_list");
   };
 
   const handleLanguageChange = (lang: string) => {
@@ -102,7 +108,9 @@ function Home() {
               onClick={handleListRedirect}>
               {language === "en" ? "DEPARTMENT" : "ዲፓርትመንት"}
             </button>
-            <button className="home-block-button" onClick={handleListRedirect}>
+            <button
+              className="home-block-button"
+              onClick={handleBlockListRedirect}>
               {language === "en" ? "BLOCK" : "ቦሎክ"}
             </button>
           </div>
@@ -144,6 +152,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/list" element={<List />} />
+        <Route path="/list/block_list" element={<BlockList />} />
+        <Route path="/list/search" element={<SearchList />} />
       </Routes>
     </Router>
   );
