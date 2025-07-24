@@ -5,9 +5,9 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import List from "./list";
 import BlockList from "./Lists/block_list";
 import SearchList from "./Lists/search_list";
+import Detail from "./detail";
 import "./App.css";
 
 const backgrounds = [
@@ -151,9 +151,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/list" element={<List />} />
         <Route path="/list/block_list" element={<BlockList />} />
         <Route path="/list/search" element={<SearchList />} />
+        <Route path="/detail" element={<Detail />} />
       </Routes>
     </Router>
   );
