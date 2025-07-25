@@ -86,7 +86,7 @@ function Home() {
             backgroundRepeat: "no-repeat",
           }}>
           <h1 className="home-title">
-            {language === "en" ? "SEARCH YOUR DESTINATION" : "የመዳረሻዎን ይፈልጉ"}
+            {language === "en" ? "SEARCH YOUR something" : "የመዳረሻዎን ይፈልጉ"}
           </h1>
           <div className="home-search-row">
             <input
