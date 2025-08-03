@@ -6,14 +6,28 @@ const Detail: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  // Accept both `department` and `detail` keys
-  const data = state?.department || state?.detail;
+  // Accept both `department` and `detail` keys, fallback to null
+  const data =
+    state?.department && typeof state.department === "object"
+      ? state.department
+      : state?.detail && typeof state.detail === "object"
+      ? state.detail
+      : null;
 
   const [showLocation, setShowLocation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
-  if (!data) return <p>No data found. Please go back.</p>;
+  if (!data)
+    return (
+      <div className="detail-container">
+        <p>No data found. Please go back.</p>
+        <button onClick={() => navigate(-1)} className="detail-btn">
+          Go Back
+        </button>
+      </div>
+    );
 
   return (
     <div className="detail-container">
@@ -80,30 +94,93 @@ const Detail: React.FC = () => {
       {showFeedback && (
         <div className="detail-modal-overlay">
           <div className="detail-modal detail-modal-feedback">
+            {/* Back button at top right */}
+            <button
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                background: "none",
+                border: "none",
+                fontSize: "1.2rem",
+                cursor: "pointer",
+              }}
+              aria-label="Close feedback"
+              onClick={() => {
+                setShowFeedback(false);
+                setFeedbackSent(false);
+                setFeedback("");
+              }}>
+              ⨉
+            </button>
             <h3 className="detail-modal-title">Leave your feedback</h3>
-            <textarea
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              rows={4}
-              maxLength={800}
-              placeholder="Write your comment (100–120 words)..."
-              className="detail-textarea"
-            />
-            <div className="detail-modal-actions">
-              <button
-                onClick={() => setShowFeedback(false)}
-                className="detail-modal-back">
-                Back
-              </button>
-              <button
-                onClick={() => {
-                  console.log("Feedback submitted:", feedback);
-                  setShowFeedback(false);
-                }}
-                className="detail-btn">
-                Send
-              </button>
-            </div>
+            {feedbackSent ? (
+              <>
+                <p className="detail-success-msg">
+                  Thank you for your feedback!
+                </p>
+                <button
+                  style={{ marginTop: "16px" }}
+                  className="detail-modal-back"
+                  onClick={() => {
+                    setShowFeedback(false);
+                    setFeedbackSent(false);
+                    setFeedback("");
+                  }}>
+                  Back
+                </button>
+              </>
+            ) : (
+              <>
+                <textarea
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                  rows={4}
+                  maxLength={800}
+                  placeholder="Write your comment (100–120 words)..."
+                  className="detail-textarea"
+                />
+                <div className="detail-modal-actions">
+                  <button
+                    onClick={() => {
+                      setShowFeedback(false);
+                      setFeedbackSent(false);
+                      setFeedback("");
+                    }}
+                    className="detail-modal-back">
+                    Back
+                  </button>
+                  <button
+                    disabled={!feedback.trim()}
+                    onClick={async () => {
+                      // Prepare feedback data
+                      const feedbackData = {
+                        department: data.department,
+                        title: data.wtitle,
+                        name: data.wname,
+                        feedback_date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
+                        feedback_text: feedback,
+                      };
+
+                      // Send feedback to backend (assumes endpoint exists)
+                      try {
+                        await fetch("/api/feedback", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(feedbackData),
+                        });
+                        setFeedbackSent(true);
+                        setFeedback("");
+                      } catch (err) {
+                        // Optionally handle error
+                      }
+                    }}
+                    className="detail-btn">
+                    Send
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

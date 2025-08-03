@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./department_list.css";
 
 function parseCSV(csv: string) {
@@ -29,6 +30,7 @@ const DepartmentList: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("Show all");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/data.csv")
@@ -64,7 +66,11 @@ const DepartmentList: React.FC = () => {
       </div>
       <ul className="department-list-ul">
         {filtered.map((row, idx) => (
-          <li key={idx} className="department-list-item">
+          <li
+            key={idx}
+            className="department-list-item"
+            onClick={() => navigate("/detail", { state: { department: row } })}
+            style={{ cursor: "pointer" }}>
             <div className="department-list-row">
               <span className="department-list-title-label"></span> {row.wtitle}
             </div>

@@ -1,0 +1,60 @@
+// server.cjs or server.js (if no "type": "module" in package.json)
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+
+const app = express();
+const PORT = 3001;
+
+app.use(express.json());
+
+const csvFile = path.join(__dirname, "public", "data", "feedback.csv");
+
+// Append feedback to CSV file, creating header if needed
+function appendFeedback(feedback) {
+  console.log("Appending feedback:", feedback); // Log incoming feedback
+
+  const row =
+    [
+      feedback.department || "",
+      feedback.title || "",
+      feedback.name || "",
+      feedback.feedback_date || "",
+      (feedback.feedback_text || "").replace(/[\r\n]+/g, " "), // Clean line breaks
+    ]
+      .map((field) => `"${field.replace(/"/g, '""')}"`) // Escape double quotes
+      .join(",") + "\n";
+
+  if (!fs.existsSync(csvFile)) {
+    const header = '"Department","Title","Name","Date","Feedback"\n';
+    fs.writeFileSync(csvFile, header, "utf8");
+  }
+  fs.appendFileSync(csvFile, row, "utf8");
+}
+
+app.post("/api/feedback", (req, res) => {
+  const feedback = req.body;
+  console.log("Received feedback POST:", feedback);
+
+  if (
+    !feedback.department ||
+    !feedback.title ||
+    !feedback.name ||
+    !feedback.feedback_date ||
+    !feedback.feedback_text
+  ) {
+    return res.status(400).json({ error: "Missing required feedback fields." });
+  }
+
+  try {
+    appendFeedback(feedback);
+    res.status(200).json({ success: true, message: "Feedback saved." });
+  } catch (err) {
+    console.error("Failed to save feedback:", err);
+    res.status(500).json({ error: "Failed to save feedback." });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
