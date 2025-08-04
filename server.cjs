@@ -4,29 +4,30 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
+const cors = require("cors");
 const PORT = 3001;
 
+app.use(cors());
 app.use(express.json());
 
 const csvFile = path.join(__dirname, "public", "data", "feedback.csv");
 
 // Append feedback to CSV file, creating header if needed
 function appendFeedback(feedback) {
-  console.log("Appending feedback:", feedback); // Log incoming feedback
-
   const row =
     [
       feedback.department || "",
       feedback.title || "",
       feedback.name || "",
       feedback.feedback_date || "",
-      (feedback.feedback_text || "").replace(/[\r\n]+/g, " "), // Clean line breaks
+      (feedback.feedback_text || "").replace(/[\r\n]+/g, " "),
     ]
-      .map((field) => `"${field.replace(/"/g, '""')}"`) // Escape double quotes
+      .map((field) => `"${field.replace(/"/g, '""')}"`)
       .join(",") + "\n";
 
+  // Ensure header matches frontend CSV
   if (!fs.existsSync(csvFile)) {
-    const header = '"Department","Title","Name","Date","Feedback"\n';
+    const header = "department,title,name,feedback_date,feedback_text\n";
     fs.writeFileSync(csvFile, header, "utf8");
   }
   fs.appendFileSync(csvFile, row, "utf8");
