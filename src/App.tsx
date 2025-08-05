@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import DepartmentList from "./Lists/department_list";
 import BlockList from "./Lists/block_list";
 import SearchList from "./Lists/search_list";
 import Detail from "./detail";
@@ -48,7 +49,7 @@ function Home() {
   };
 
   const handleListRedirect = () => {
-    navigate("/list");
+    navigate("/list/department_list");
   };
 
   const handleBlockListRedirect = () => {
@@ -151,8 +152,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/list/department_list" element={<DepartmentList />} />
         <Route path="/list/block_list" element={<BlockList />} />
-        <Route path="/list/search" element={<SearchList />} />
+        <Route path="/list/search_list" element={<SearchList />} />
         <Route path="/detail" element={<Detail />} />
       </Routes>
     </Router>
