@@ -1,3 +1,13 @@
+.block-list-container{
+width: 1920px;
+height: 1080px;
+
+}
+
+
+
+
+
 .block-list-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);

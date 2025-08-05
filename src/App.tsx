@@ -21,7 +21,7 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +30,20 @@ function Home() {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
+  //newly added 
+  // useEffect(() => {
+  //   const updateScale = () => {
+  //     const scaleX = window.innerWidth / 1080;
+  //     const scaleY = window.innerHeight / 1920;
+  //     const scale = Math.min(scaleX, scaleY);
+  //     document.documentElement.style.setProperty("--scale-factor", scale.toString());
+  //   };
+  //   updateScale();
+  //   window.addEventListener("resize", updateScale);
+  //   return () => window.removeEventListener("resize", updateScale);
+  // }, []);  
+
+  //ends here 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -61,34 +75,49 @@ function Home() {
 
   return (
     <>
-      <div className="top-video-container">
+    
+    
+      {/* <div className="top-video-container">
         <video src="/b.mp4" autoPlay loop muted className="home-top-video" />
-      </div>
+      </div> */}
+
       <div className="home-container">
+         <div
+          className="background-image"
+          style={{
+            backgroundImage: `url(${backgrounds[bgIndex]})`,
+          }}
+        ></div>
+        
         <div className="home-top-bar">
           <div className="language-selector">
-            <span role="img" aria-label="globe">
-              🌐
-            </span>
+            <img src="/subway_world-1.svg" alt="globalImage" 
+             />
             <select
               value={language}
               onChange={(e) => handleLanguageChange(e.target.value)}
-              className="language-dropdown">
-              <option value="en">English</option>
+              className="language-dropdown" >
+                
+                 <option value="" disabled hidden>language</option>
+              < option value="en">English</option>
               <option value="am">አማርኛ</option>
             </select>
           </div>
         </div>
+        
         <div
           className="home-content"
-          style={{
-            backgroundImage: `url(${backgrounds[bgIndex]})`,
-            backgroundRepeat: "no-repeat",
-          }}>
+          // style={{
+          //   backgroundImage: `url(${backgrounds[bgIndex]})`,
+          //   backgroundRepeat: "no-repeat",
+          // }}
+          >
           <h1 className="home-title">
-            {language === "en" ? "SEARCH YOUR something" : "የመዳረሻዎን ይፈልጉ"}
+            {language === "en" ? "SEARCH YOUR DESTINATION" : "የመዳረሻዎን ይፈልጉ"}
           </h1>
           <div className="home-search-row">
+             <img src="mingcute_search-fill.svg" alt="searchImage" className="home-search-icon"
+             />
             <input
               type="text"
               value={searchTerm}
@@ -97,9 +126,7 @@ function Home() {
               className="home-search-input"
             />
             <button onClick={handleSearch} className="home-search-button">
-              <span role="img" aria-label="search">
-                🔍
-              </span>
+             
             </button>
           </div>
           <div className="home-buttons-row">
@@ -117,10 +144,15 @@ function Home() {
           <button
             onClick={handleLocationClick}
             className="home-location-button">
-            <span role="img" aria-label="location">
-              📍
-            </span>
+            <img src="gridicons_location.svg" alt="locationImage" className="home-location-icon" />
             {language === "en" ? "CURRENT LOCATION" : "የአሁኑ ቦታ"}
+          </button>
+          <button
+            className="home-feedback-button"
+            onClick={() => window.open("mailto:feedback@example.com", "_blank")}
+          >
+            <img src="ic_baseline-feedback.svg" alt="feedbackImage" className="home-feedback-icon" />
+            {language === "en" ? "COMMENT" : "አስተያየት"}
           </button>
         </div>
 
@@ -138,10 +170,11 @@ function Home() {
             </div>
           </div>
         )}
-      </div>
-      <div className="bottom-video-container">
+       </div>
+      {/* <div className="bottom-video-container">
         <video src="/a.mp4" autoPlay loop muted className="home-bottom-video" />
-      </div>
+     
+      </div> */}
     </>
   );
 }

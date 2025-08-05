@@ -60,52 +60,54 @@ const BlockList: React.FC = () => {
   };
 
   return (
-    <div className="block-list-bg">
-      <header className="block-list-header">
-        <h1>ERA Wayfinding</h1>
-        <p>Select a block to view its departments</p>
-      </header>
-      <div className="block-list-container">
-        <div className="block-list-filter">
-          {BLOCKS.map((block) => (
-            <button
-              key={block}
-              onClick={() => setSelectedBlock(block)}
-              className={`block-list-btn${
-                selectedBlock === block ? " active" : ""
-              }`}>
-              Block {block}
-            </button>
-          ))}
-        </div>
+    <div className="block-list-container">
+       <><div className="top-video-container">
+      <video src="/b.mp4" autoPlay loop muted className="home-top-video" />
+    </div><div className="block-list-bg">
+        <header className="block-list-header">
+          <h1>ERA Wayfinding</h1>
+          <p>Select a block to view its departments</p>
+        </header>
+        <div className="block-list-container">
+          <div className="block-list-filter">
+            {BLOCKS.map((block) => (
+              <button
+                key={block}
+                onClick={() => setSelectedBlock(block)}
+                className={`block-list-btn${selectedBlock === block ? " active" : ""}`}>
+                Block {block}
+              </button>
+            ))}
+          </div>
 
-        <div className="block-list-card">
-          <h2 className="block-list-title">
-            Block {selectedBlock} Departments
-          </h2>
+          <div className="block-list-card">
+            <h2 className="block-list-title">
+              Block {selectedBlock} Departments
+            </h2>
 
-          {loading ? (
-            <p className="block-list-loading">Loading data...</p>
-          ) : error ? (
-            <p className="block-list-error">Error: {error}</p>
-          ) : (
-            <ul className="block-list-ul">
-              {filtered.length === 0 ? (
-                <li className="block-list-empty">No departments found.</li>
-              ) : (
-                filtered.map((dep, idx) => (
-                  <li
-                    key={idx}
-                    className="block-list-li"
-                    onClick={() => handleClick(dep)}>
-                    {dep.department || "Unnamed Department"}
-                  </li>
-                ))
-              )}
-            </ul>
-          )}
+            {loading ? (
+              <p className="block-list-loading">Loading data...</p>
+            ) : error ? (
+              <p className="block-list-error">Error: {error}</p>
+            ) : (
+              <ul className="block-list-ul">
+                {filtered.length === 0 ? (
+                  <li className="block-list-empty">No departments found.</li>
+                ) : (
+                  filtered.map((dep, idx) => (
+                    <li
+                      key={idx}
+                      className="block-list-li"
+                      onClick={() => handleClick(dep)}>
+                      {dep.department || "Unnamed Department"}
+                    </li>
+                  ))
+                )}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
+      </div></>
     </div>
   );
 };
