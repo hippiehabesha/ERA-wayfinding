@@ -61,15 +61,15 @@ const BlockList: React.FC = () => {
 
   return (
     <div className="block-list-container">
-       <><div className="top-video-container">
-      <video src="/b.mp4" autoPlay loop muted className="home-top-video" />
-    </div><div className="block-list-bg">
-        <header className="block-list-header">
-          <h1>ERA Wayfinding</h1>
-          <p>Select a block to view its departments</p>
-        </header>
+       <>
+    <div className="block-list-bg">
+        
         <div className="block-list-container">
+          <div className="back-button" onClick={() => navigate(-1)}>
+          <img src="/Vector.svg" alt="BackImage" className="back-button-icon" />
+          </div>
           <div className="block-list-filter">
+            <span className="block-list-filter-label">Filter</span>
             {BLOCKS.map((block) => (
               <button
                 key={block}
@@ -79,7 +79,7 @@ const BlockList: React.FC = () => {
               </button>
             ))}
           </div>
-
+             
           <div className="block-list-card">
             <h2 className="block-list-title">
               Block {selectedBlock} Departments
@@ -98,8 +98,24 @@ const BlockList: React.FC = () => {
                     <li
                       key={idx}
                       className="block-list-li"
-                      onClick={() => handleClick(dep)}>
-                      {dep.department || "Unnamed Department"}
+                      onClick={() => handleClick(dep)}
+                      >
+                        <span className="block-list-text">
+                      {(dep.department || "Unnamed Department").replace(/"/g, "")}
+                        </span>
+                       <button
+                      className="plus-btn"
+                        onClick={e => {
+                        e.stopPropagation();
+                         handleClick(dep);
+          }}
+        >
+          <img
+            src="/octicon_feed-plus-16.svg" // or .png, adjust path as needed
+            alt="Additional Info"
+            className="plus-btn-img"
+          />
+        </button>
                     </li>
                   ))
                 )}
