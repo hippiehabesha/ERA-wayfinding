@@ -65,11 +65,13 @@ const BlockList: React.FC = () => {
     <div className="block-list-bg">
         
         <div className="block-list-container">
+          <div className="block-list-header">
+
+         
           <div className="back-button" onClick={() => navigate(-1)}>
           <img src="/Vector.svg" alt="BackImage" className="back-button-icon" />
           </div>
           <div className="block-list-filter">
-            <span className="block-list-filter-label">Filter</span>
             {BLOCKS.map((block) => (
               <button
                 key={block}
@@ -79,7 +81,8 @@ const BlockList: React.FC = () => {
               </button>
             ))}
           </div>
-             
+          </div>
+          
           <div className="block-list-card">
             <h2 className="block-list-title">
               Block {selectedBlock} Departments

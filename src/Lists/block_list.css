@@ -21,31 +21,36 @@ height: 1080px;
   min-height: 60vh;
   position: relative;
 }
+.block-list-header {
+  width: 100%;
+  display: flex;
+  margin-top:30px;
+  margin-bottom: 30px;
+  align-items: center;
+ 
+}
 .back-button-icon {
-
+/* 
   margin-right: 620px;
  margin-top: 20px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; 
+  width: 39px;
+  height: 39px;
+  cursor: pointer; */
+  margin-left: 30px;
+  margin-right: 170px;
   width: 39px;
   height: 39px;
   cursor: pointer;
+   align-items: center; 
 }
 
 .block-list-filter {
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   display: flex;
   gap: 20px;
 }
-.block-list-filter-label {
-  font-size: 30px;
-  color: #222222;
-  font-family: 'Inter';
-  font-weight: bold;
-  align-items: center;
-  display: flex;
-  margin-left: 30px;
-  margin-right: 80px;
-}
+
 
 .block-list-btn {
   display: flex;
@@ -54,7 +59,7 @@ height: 1080px;
   padding: 20px 20px;
   background: #ffffff;
   color: #222;
-  border: 2px solid #ef6c00;
+  border: 2px solid #EF842D;
   border-radius: 16px;
   cursor: pointer;
   font-weight: medium;
@@ -69,7 +74,7 @@ height: 1080px;
 
 .block-list-btn:hover,
 .block-list-btn.active {
-  background: #ef6c00;
+  background: #EF842D;
   color: #fff;
  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* y=5px, blur=15px, dark color */
 }
@@ -151,7 +156,7 @@ height: 1080px;
 
 .block-list-li:hover {
   background: #ffe0b2;
-  color: #ef6c00;
+  color: #222222;
 }
 
 .block-list-empty {
@@ -164,7 +169,7 @@ height: 1080px;
 .block-list-loading,
 .block-list-error {
   text-align: center;
-  color: #ef6c00;
+  color: #EF842D;
   font-size: 1.08rem;
   padding: 18px 0;
 }
