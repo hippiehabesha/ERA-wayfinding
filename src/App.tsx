@@ -8,6 +8,7 @@ import {
 import BlockList from "./Lists/block_list";
 import SearchList from "./Lists/search_list";
 import Detail from "./detail";
+import DepartmentList from "./Lists/department_list";
 import "./App.css";
 
 const backgrounds = [
@@ -30,20 +31,6 @@ function Home() {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-  //newly added 
-  // useEffect(() => {
-  //   const updateScale = () => {
-  //     const scaleX = window.innerWidth / 1080;
-  //     const scaleY = window.innerHeight / 1920;
-  //     const scale = Math.min(scaleX, scaleY);
-  //     document.documentElement.style.setProperty("--scale-factor", scale.toString());
-  //   };
-  //   updateScale();
-  //   window.addEventListener("resize", updateScale);
-  //   return () => window.removeEventListener("resize", updateScale);
-  // }, []);  
-
-  //ends here 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -75,60 +62,60 @@ function Home() {
 
   return (
     <>
-    
-    
-      {/* <div className="top-video-container">
-        <video src="/b.mp4" autoPlay loop muted className="home-top-video" />
-      </div> */}
-
       <div className="home-container">
-         <div
+        <div
           className="background-image"
           style={{
             backgroundImage: `url(${backgrounds[bgIndex]})`,
-          }}
-        ></div>
-        
+          }}></div>
+
         <div className="home-top-bar">
           <div className="language-selector">
-            <img src="/subway_world-1.svg" alt="globalImage" 
-             />
+            <img src="/subway_world-1.svg" alt="globalImage" />
             <select
               value={language}
               onChange={(e) => handleLanguageChange(e.target.value)}
-              className="language-dropdown" >
-                
-                 <option value="" disabled hidden>language</option>
-              < option value="en">English</option>
+              className="language-dropdown">
+              <option value="" disabled hidden>
+                language
+              </option>
+              <option value="en">English</option>
               <option value="am">አማርኛ</option>
             </select>
           </div>
         </div>
-        
-        <div
-          className="home-content"
-          // style={{
-          //   backgroundImage: `url(${backgrounds[bgIndex]})`,
-          //   backgroundRepeat: "no-repeat",
-          // }}
-          >
+
+        <div className="home-content">
           <h1 className="home-title">
             {language === "en" ? "SEARCH YOUR DESTINATION" : "የመዳረሻዎን ይፈልጉ"}
           </h1>
+
+          {/* 👇 UPDATED SEARCH BAR */}
           <div className="home-search-row">
-             <img src="mingcute_search-fill.svg" alt="searchImage" className="home-search-icon"
-             />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder={language === "en" ? "Search..." : "ፈልግ..."}
-              className="home-search-input"
-            />
-            <button onClick={handleSearch} className="home-search-button">
-             
-            </button>
+            <div className="search-input-wrapper">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleInputChange}
+                placeholder={language === "en" ? "Search..." : "ፈልግ..."}
+                className="home-search-input"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearch();
+                }}
+              />
+              <button
+                className="search-icon-button"
+                onClick={handleSearch}
+                aria-label="Search">
+                <img
+                  src="mingcute_search-fill.svg"
+                  alt="search"
+                  className="search-icon-img"
+                />
+              </button>
+            </div>
           </div>
+
           <div className="home-buttons-row">
             <button
               className="home-department-button"
@@ -141,17 +128,28 @@ function Home() {
               {language === "en" ? "BLOCK" : "ቦሎክ"}
             </button>
           </div>
+
           <button
             onClick={handleLocationClick}
             className="home-location-button">
-            <img src="gridicons_location.svg" alt="locationImage" className="home-location-icon" />
+            <img
+              src="gridicons_location.svg"
+              alt="locationImage"
+              className="home-location-icon"
+            />
             {language === "en" ? "CURRENT LOCATION" : "የአሁኑ ቦታ"}
           </button>
+
           <button
             className="home-feedback-button"
-            onClick={() => window.open("mailto:feedback@example.com", "_blank")}
-          >
-            <img src="ic_baseline-feedback.svg" alt="feedbackImage" className="home-feedback-icon" />
+            onClick={() =>
+              window.open("mailto:feedback@example.com", "_blank")
+            }>
+            <img
+              src="ic_baseline-feedback.svg"
+              alt="feedbackImage"
+              className="home-feedback-icon"
+            />
             {language === "en" ? "COMMENT" : "አስተያየት"}
           </button>
         </div>
@@ -170,11 +168,7 @@ function Home() {
             </div>
           </div>
         )}
-       </div>
-      {/* <div className="bottom-video-container">
-        <video src="/a.mp4" autoPlay loop muted className="home-bottom-video" />
-     
-      </div> */}
+      </div>
     </>
   );
 }
@@ -186,6 +180,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/list/block_list" element={<BlockList />} />
         <Route path="/list/search" element={<SearchList />} />
+        <Route path="/list" element={<DepartmentList />} />
         <Route path="/detail" element={<Detail />} />
       </Routes>
     </Router>
