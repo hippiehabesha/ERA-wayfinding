@@ -12,12 +12,42 @@
 .department-list-container {
   width: 100%;
   height: 100%;
-
+ background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  justify-content: flex-start;
   padding: 2rem;
-  background: var(--gray-bg);
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(255, 136, 0, 0.08);
-  border: 1px solid var(--gray-border);
+ 
+
+
+}
+.back-button-department-icon {
+  
+  margin-left: 10px;
+  margin-right: 180px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+   
+}
+.plus-btn {
+  margin-left: auto;
+  margin-right: 10px;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.plus-btn-img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  
 }
 
 .department-list-title {
@@ -49,12 +79,6 @@
   background: var(--orange-light);
   color: var(--orange-dark);
 }
-
-.department-list-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 .department-list-card {
   /* width: 100%; */
   /* width: 600px; */
@@ -66,9 +90,15 @@
   margin-bottom: 48px;
 
 }
+.department-list-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 
 .department-list-item {
- 
+  
   font-family: "Roboto", sans-serif;
    text-align: left;
   display: flex;
@@ -92,25 +122,10 @@
 .department-list-row {
    font-size: 28px;
   color: #222222;
-  display: flex;
+  font-family: 'Roboto', sans-serif;
   align-items: center;
-    justify-content: space-between;
-}
-.back-button-department-icon {
-  
-  margin-left: 0px;
-  margin-right: 180px;
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-   
 }
 
-.department-list-title-label {
-  font-weight: 600;
-  color: var(--orange-main);
-  margin-right: 0.5em;
-}
 
 .department-list-loading,
 .department-list-empty {
@@ -121,7 +136,7 @@
 }
 
 .department-list-category-filter {
-  margin-bottom: 1.5rem;
+  margin-bottom: 48px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

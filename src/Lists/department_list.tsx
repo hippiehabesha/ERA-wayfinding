@@ -103,6 +103,19 @@ const DepartmentList: React.FC = () => {
             <div className="department-list-row">
               <span className="department-list-title-label"></span> {row.wtitle}
             </div>
+                 <button
+                      className="plus-btn"
+                        onClick={e => {
+                        e.stopPropagation();
+                         navigate("/detail", { state: { department: row } });
+          }}
+        >
+          <img
+            src="/octicon_feed-plus-16.svg" // or .png, adjust path as needed
+            alt="Additional Info"
+            className="plus-btn-img"
+          />
+        </button>
           </li>
         ))}
       </ul>

@@ -53,6 +53,9 @@ const Detail: React.FC = () => {
   return (
     <div className="detail-container">
       {/* Card */}
+      <div className="back-button-department" onClick={() => navigate(-1)}>
+          <img src="/Vector.svg" alt="BackImage" className="back-button-details-icon" />
+          </div>
       <div className="detail-card">
         <img
           src="/profile_picture.jpg"
@@ -66,7 +69,8 @@ const Detail: React.FC = () => {
         <h2 className="detail-name">{data.wname}</h2>
         <p className="detail-department">{departmentText}</p>
         <p className="detail-contact" aria-label={`Contact: ${data.wcontact}`}>
-          📞 {data.wcontact}
+          <img src="/Vector-phone.svg" alt="Phone Icon" className="phone-icon" />
+           {data.wcontact}
         </p>
 
         <div className="detail-destination">
@@ -76,23 +80,23 @@ const Detail: React.FC = () => {
           <div className="detail-destination-grid">
             <div>
               <p className="detail-icon" aria-label="Block">
-                🏢
+              <img src="/Vector-block.svg" alt="block Icon" className="block-icon" />
               </p>
-              <p>Block</p>
+              <p className="block-p">Block</p>
               <p className="detail-value">{data.block}</p>
             </div>
             <div>
               <p className="detail-icon" aria-label="Floor">
-                🧱
+                <img src="/stairs.svg" alt="stairs Icon" className="stairs-icon" />
               </p>
-              <p>Floor</p>
+              <p className="block-p">Floor</p>
               <p className="detail-value">{data.floor}</p>
             </div>
             <div>
               <p className="detail-icon" aria-label="Room">
-                🚪
+                <img src="/Vector-room.svg" alt="room Icon" className="room-icon" />
               </p>
-              <p>Room</p>
+              <p className="block-p">Room</p>
               <p className="detail-value">{data.officeno}</p>
             </div>
           </div>
@@ -105,13 +109,15 @@ const Detail: React.FC = () => {
           onClick={() => setShowLocation(true)}
           className="detail-btn"
           aria-label="Show current location">
-          📍 CURRENT LOCATION
+             <img src="/gridicons_location.svg" alt="location Icon" className="location-icon" />
+          CURRENT LOCATION
         </button>
         <button
           onClick={() => setShowFeedback(true)}
           className="detail-btn"
           aria-label="Leave feedback">
-          📝 FEEDBACK
+            <img src="/ic_baseline-feedback.svg" alt="feedback Icon" className="feedback-icon" />
+           FEEDBACK
         </button>
       </div>
 
