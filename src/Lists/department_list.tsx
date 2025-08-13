@@ -30,6 +30,8 @@ const DepartmentList: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("Show all");
+  const [startIdx, setStartIdx] = useState(0);
+  const visibleCount = 4; // Show 4 categories at a time
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,36 +49,65 @@ const DepartmentList: React.FC = () => {
       ? data
       : data.filter((row) => row.department_Category === selectedCategory);
 
+  const handlePrev = () => {
+    setStartIdx((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleNext = () => {
+    setStartIdx((prev) => Math.min(prev + 1, categories.length - visibleCount));
+  };
+
   if (loading) return <div className="department-list-loading">Loading...</div>;
 
   return (
     <div className="department-list-container">
-      <h2 className="department-list-title">Department</h2>
-      <div className="department-list-category-filter">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`department-list-category-btn${
-              selectedCategory === cat ? " active" : ""
-            }`}
-            onClick={() => setSelectedCategory(cat)}>
-            {cat}
-          </button>
-        ))}
+      <div className="back-button-department" onClick={() => navigate(-1)}>
+        <img
+          src="/Vector.svg"
+          alt="BackImage"
+          className="back-button-department-icon"
+        />
       </div>
-      <ul className="department-list-ul">
-        {filtered.map((row, idx) => (
-          <li
-            key={idx}
-            className="department-list-item"
-            onClick={() => navigate("/detail", { state: { department: row } })}
-            style={{ cursor: "pointer" }}>
-            <div className="department-list-row">
-              <span className="department-list-title-label"></span> {row.wtitle}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="department-list-category-carousel">
+        <button onClick={handlePrev} disabled={startIdx === 0}>
+          Prev
+        </button>
+        <div className="department-list-category-filter">
+          {categories.slice(startIdx, startIdx + visibleCount).map((cat) => (
+            <button
+              key={cat}
+              className={`department-list-category-btn${
+                selectedCategory === cat ? " active" : ""
+              }`}
+              onClick={() => setSelectedCategory(cat)}>
+              {cat}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={handleNext}
+          disabled={startIdx >= categories.length - visibleCount}>
+          Next
+        </button>
+      </div>
+      <div className="department-list-card">
+        <ul className="department-list-ul">
+          {filtered.map((row, idx) => (
+            <li
+              key={idx}
+              className="department-list-item"
+              onClick={() =>
+                navigate("/detail", { state: { department: row } })
+              }
+              style={{ cursor: "pointer" }}>
+              <div className="department-list-row">
+                <span className="department-list-title-label"></span>{" "}
+                {row.wtitle}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
       {!filtered.length && (
         <div className="department-list-empty">No titles found.</div>
       )}

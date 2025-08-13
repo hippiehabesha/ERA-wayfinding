@@ -2,7 +2,7 @@
 :root {
   --orange-main: #ff8800;
   --orange-light: #ffe5cc;
-  --orange-dark: #cc7000;
+  --orange-dark: #ef842d;
   --gray-bg: #fffaf3;
   --gray-border: #f2e6da;
   --text-main: #2d2d2d;
@@ -10,8 +10,9 @@
 }
 
 .department-list-container {
-  max-width: 700px;
-  margin: 2rem auto;
+  width: 100%;
+  height: 100%;
+
   padding: 2rem;
   background: var(--gray-bg);
   border-radius: 16px;
@@ -20,16 +21,17 @@
 }
 
 .department-list-title {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
-  color: var(--orange-dark);
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #222222;
   text-align: center;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .department-list-filter {
-  margin-bottom: 1.5rem;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -53,15 +55,31 @@
   padding: 0;
   margin: 0;
 }
+.department-list-card {
+  /* width: 100%; */
+  /* width: 600px; */
+
+  background: #fff8e1;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+  padding: 32px 50px 28px 50px;
+  margin-bottom: 48px;
+}
 
 .department-list-item {
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.2rem;
-  border-bottom: 1px solid var(--gray-border);
-  background: #fff;
-  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 20px 20px;
+  background: #ffffff;
+  margin: 15px;
   transition: box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(255, 136, 0, 0.04);
+  transition: background 0.15s, color 0.15s;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
 }
 
 .department-list-item:hover {
@@ -70,10 +88,18 @@
 }
 
 .department-list-row {
-  font-size: 1.08rem;
-  color: var(--text-main);
+  font-size: 28px;
+  color: #222222;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.back-button-department-icon {
+  margin-left: 0px;
+  margin-right: 180px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
 }
 
 .department-list-title-label {
@@ -99,29 +125,28 @@
 }
 
 .department-list-category-btn {
-  padding: 10px 20px;
-  border: 1px solid var(--gray-border);
-  background: var(--orange-light);
+  padding: 20px 20px;
+  border: 2px solid #ef842d;
+  background: #ffffff;
   cursor: pointer;
-  border-radius: 6px;
-  font-size: 1rem;
-  color: var(--orange-dark);
-  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-  font-weight: 500;
-  box-shadow: 0 1px 4px rgba(255, 136, 0, 0.04);
+  border-radius: 16px;
+  font-size: 26px;
+  color: #222222;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+
+  /* unfinished animation  */
 }
 
 .department-list-category-btn:hover {
-  background: var(--orange-main);
-  border-color: var(--orange-main);
+  background: #ef842d;
   color: #fff;
-  box-shadow: 0 2px 8px rgba(255, 136, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
 }
 
 .department-list-category-btn.active {
-  background: var(--orange-dark);
+  animation: none;
+  background: #ef842d;
   color: #fff;
-  border-color: var(--orange-dark);
   font-weight: bold;
   box-shadow: 0 2px 12px rgba(255, 136, 0, 0.15);
 }
