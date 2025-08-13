@@ -106,10 +106,7 @@ const BlockList: React.FC = () => {
                         className="block-list-li"
                         onClick={() => handleClick(dep)}>
                         <span className="block-list-text">
-                          {(dep.department || "Unnamed Department").replace(
-                            /"/g,
-                            ""
-                          )}
+                      {(dep.department || "Unnamed Department")}
                         </span>
                         <button
                           className="plus-btn"

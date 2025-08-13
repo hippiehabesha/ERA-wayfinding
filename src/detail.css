@@ -1,14 +1,14 @@
 body,
 .detail-container {
   background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-
+  min-height: 100vh;
   font-family: "Roboto", sans-serif;
   margin: 0;
-  padding: -30px;
+  padding: 0;
 }
 .back-button-details-icon {
-  margin-top: 70px;
-  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 50px;
   margin-right: 550px;
   width: 45px;
   height: 45px;
@@ -34,7 +34,7 @@ body,
   align-items: center;
   margin-bottom: 30px;
   position: relative;
-  margin-top: 300px;
+  margin-top: 20px;
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25), 0 1.5px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -44,6 +44,9 @@ body,
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #fff;
+
+  margin-top: -110px;
+  margin-bottom: 30px;
 
   margin-top: -110px;
   margin-bottom: 30px;
@@ -86,6 +89,10 @@ body,
 .detail-destination {
   width: 100%;
   margin-top: 10px;
+}
+.block-p {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
 }
 .block-p {
   font-size: 18px;
@@ -135,6 +142,11 @@ body,
   background: #ef842d;
   color: #fff;
   border: none;
+  border-radius: 16px;
+  padding: 20px 30px;
+  font-family: "Roboto", sans-serif;
+  font-size: 28px;
+  font-weight: medium;
   border-radius: 16px;
   padding: 20px 30px;
   font-family: "Roboto", sans-serif;

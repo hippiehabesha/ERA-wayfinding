@@ -17,13 +17,11 @@ body {
   height: 100%;
   background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
   justify-content: flex-start;
-  padding: 20px;
-  overflow-x: hidden;
+  padding: 2rem;
 }
 .back-button-department-icon {
   margin-left: 10px;
   margin-right: 180px;
-  margin-bottom: 30px;
   width: 45px;
   height: 45px;
   cursor: pointer;
@@ -94,23 +92,22 @@ body {
   margin: 0;
 }
 
-/* .department-list-item {
-  
+.department-list-item {
   font-family: "Roboto", sans-serif;
-   text-align: left;
+  text-align: left;
   display: flex;
   align-items: center;
   justify-content: space-between;
-   gap: 50px;
+  gap: 50px;
   padding: 20px 20px;
   background: #ffffff;
   margin: 15px;
   transition: box-shadow 0.2s;
   transition: background 0.15s, color 0.15s;
   border-radius: 16px;
-   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
-} */
-.department-list-item {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+*/ .department-list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
