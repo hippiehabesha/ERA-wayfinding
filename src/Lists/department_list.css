@@ -8,13 +8,16 @@
   --text-main: #2d2d2d;
   --text-muted: #a6a6a6;
 }
-
+html, body {
+  overflow-x: hidden;
+}
 .department-list-container {
   width: 100%;
   height: 100%;
  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
   justify-content: flex-start;
-  padding: 2rem;
+  padding: 20px;
+  overflow-x: hidden;
  
 
 
@@ -23,6 +26,7 @@
   
   margin-left: 10px;
   margin-right: 180px;
+  margin-bottom: 30px;
   width: 45px;
   height: 45px;
   cursor: pointer;
@@ -97,7 +101,7 @@
 }
 
 
-.department-list-item {
+/* .department-list-item {
   
   font-family: "Roboto", sans-serif;
    text-align: left;
@@ -112,8 +116,22 @@
   transition: background 0.15s, color 0.15s;
   border-radius: 16px;
    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+} */
+.department-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px; /* same spacing as block list */
+  padding: 20px 20px;
+  margin: 15px 0;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  font-size: 28px;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 }
-
 .department-list-item:hover {
   box-shadow: 0 4px 16px rgba(255, 136, 0, 0.1);
   border-color: var(--orange-light);
@@ -138,9 +156,20 @@
 .department-list-category-filter {
   margin-bottom: 48px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  /* flex-wrap: wrap; */
+  gap: 20px;
+  justify-content: flex-start;
+   overflow-x: auto;
+   scroll-behavior: smooth;
+   padding-bottom: 10px;
+}
+.department-list-category-filter::-webkit-scrollbar {
+  height: 10px;
+}
+
+.department-list-category-filter::-webkit-scrollbar-thumb {
+  background: var(--orange-dark);
+  border-radius: 16px;
 }
 
 .department-list-category-btn {
@@ -152,6 +181,9 @@
   font-size: 26px;
   color: #222222;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+
+   flex: 0 0 calc(25% - 10px); /* show exactly 4 at a time */
+  max-width: calc(25% - 10px);
  
   /* unfinished animation  */
 }
