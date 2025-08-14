@@ -24,6 +24,12 @@ function Home() {
   const [bgIndex, setBgIndex] = useState(0);
   const [language, setLanguage] = useState("");
   const navigate = useNavigate();
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [feedbackType, setFeedbackType] = useState("Report");
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackStatus, setFeedbackStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,6 +64,42 @@ function Home() {
 
   const handleLanguageChange = (lang: string) => {
     setLanguage(lang);
+  };
+
+  const handleOpenFeedback = () => {
+    setIsFeedbackOpen(true);
+  };
+
+  const handleCloseFeedback = () => {
+    setIsFeedbackOpen(false);
+    setFeedbackText("");
+    setFeedbackType("Report");
+  };
+
+  const handleSendFeedback = async () => {
+    setFeedbackStatus("idle"); // reset status before send
+    try {
+      const response = await fetch("http://localhost:3001/api/comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: feedbackType,
+          comment: feedbackText,
+        }),
+      });
+
+      if (response.ok) {
+        setFeedbackStatus("success");
+        setFeedbackText(""); // optional: clear textarea
+      } else {
+        setFeedbackStatus("error");
+      }
+    } catch (err) {
+      console.error("Error submitting comment:", err);
+      setFeedbackStatus("error");
+    }
   };
 
   return (
@@ -140,11 +182,7 @@ function Home() {
             {language === "en" ? "CURRENT LOCATION" : "የአሁኑ ቦታ"}
           </button>
 
-          <button
-            className="home-feedback-button"
-            onClick={() =>
-              window.open("mailto:feedback@example.com", "_blank")
-            }>
+          <button className="home-feedback-button" onClick={handleOpenFeedback}>
             <img
               src="ic_baseline-feedback.svg"
               alt="feedbackImage"
@@ -165,6 +203,70 @@ function Home() {
                 className="dialog-close-button">
                 {language === "en" ? "Close" : "ዝጋ"}
               </button>
+            </div>
+          </div>
+        )}
+        {isFeedbackOpen && (
+          <div className="dialog-overlay">
+            <div className="dialog-content orange-theme">
+              <h3 className="dialog-title">
+                {language === "en" ? "Submit Feedback" : "አስተያየት ያቅርቡ"}
+              </h3>
+
+              <select
+                className="dialog-select"
+                value={feedbackType}
+                onChange={(e) => setFeedbackType(e.target.value)}>
+                <option value="Report">
+                  {language === "en" ? "Report" : "ሪፖርት"}
+                </option>
+                <option value="Feedback">
+                  {language === "en" ? "Feedback" : "አስተያየት"}
+                </option>
+                <option value="Issue">
+                  {language === "en" ? "Issue" : "ችግር"}
+                </option>
+              </select>
+
+              <textarea
+                className="dialog-textarea"
+                placeholder={
+                  language === "en"
+                    ? "Enter your message here..."
+                    : "መልእክትዎን እዚህ ያስገቡ..."
+                }
+                value={feedbackText}
+                onChange={(e) => setFeedbackText(e.target.value)}
+              />
+
+              {/* 🟢 Feedback Status Messages */}
+              {feedbackStatus === "success" && (
+                <p className="feedback-success-message">
+                  {language === "en"
+                    ? "✅ Your comment has been submitted!"
+                    : "✅ አስተያየትዎ ተልኳል።"}
+                </p>
+              )}
+
+              {feedbackStatus === "error" && (
+                <p className="feedback-error-message">
+                  {language === "en"
+                    ? "❌ Something went wrong. Please try again."
+                    : "❌ ችግር ተፈጥሯል። እባክዎ ደግመው ይሞክሩ።"}
+                </p>
+              )}
+
+              {/* 🔘 Buttons */}
+              <div className="dialog-buttons-row">
+                <button onClick={handleCloseFeedback} className="dialog-button">
+                  {language === "en" ? "Back" : "ተመለስ"}
+                </button>
+                <button
+                  onClick={handleSendFeedback}
+                  className="dialog-button send">
+                  {language === "en" ? "Send" : "ላክ"}
+                </button>
+              </div>
             </div>
           </div>
         )}

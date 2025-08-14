@@ -61,11 +61,38 @@ const BlockList: React.FC = () => {
 
   return (
     <div className="block-list-container">
+<<<<<<< HEAD
        <>
     <div className="block-list-bg">
         
         <div className="block-list-container">
           <div className="block-list-header">
+=======
+      <>
+        <div className="block-list-bg">
+          <div className="block-list-container">
+            <div className="block-list-header">
+              <div className="back-button" onClick={() => navigate(-1)}>
+                <img
+                  src="/Vector.svg"
+                  alt="BackImage"
+                  className="back-button-icon"
+                />
+              </div>
+              <div className="block-list-filter">
+                {BLOCKS.map((block) => (
+                  <button
+                    key={block}
+                    onClick={() => setSelectedBlock(block)}
+                    className={`block-list-btn${
+                      selectedBlock === block ? " active" : ""
+                    }`}>
+                    Block {block}
+                  </button>
+                ))}
+              </div>
+            </div>
+>>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
 
          
           <div className="back-button" onClick={() => navigate(-1)}>

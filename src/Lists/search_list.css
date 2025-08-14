@@ -1,17 +1,51 @@
 .search-list-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
 }
 
+.search-list-card {
+  background: #222;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+  padding: 32px 50px;
+  width: 100%;
+  max-width: 800px;
+}
+.back-button-search-icon {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  margin-right: 850px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
 .search-list-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #2d3a4a;
   text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-family: "Inter", sans-serif;
+  color: #222222;
+  letter-spacing: 0.5px;
+}
+
+.search-list-search-input {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 2px solid #ef842d;
+  font-size: 20px;
+  width: 50vw;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.search-list-search-input:focus {
+  border-color: #ef842d;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
 }
 
 .search-list-ul {
@@ -21,33 +55,35 @@
 }
 
 .search-list-item {
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.2rem;
-  border-bottom: 1px solid #e0e0e0;
-  background: #f8fafc;
-  border-radius: 8px;
-  transition: box-shadow 0.2s;
+  padding: 20px 20px;
+  margin: 15px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  font-size: 26px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 16px;
 }
 
 .search-list-item:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  background: #ffe0b2;
+  color: #222222;
 }
 
 .search-list-row {
-  margin-bottom: 0.5rem;
-  font-size: 1.05rem;
+  margin-bottom: 6px;
 }
 
 .search-list-label {
-  font-weight: 600;
-  color: #1a2330;
-  margin-right: 0.5em;
+  font-weight: bold;
+  color: #ef842d;
 }
 
 .search-list-loading,
 .search-list-empty {
   text-align: center;
-  font-size: 1.2rem;
-  color: #888;
-  margin-top: 3rem;
+  color: #ef842d;
+  font-size: 1.1rem;
+  padding: 18px 0;
 }

@@ -56,6 +56,48 @@ app.post("/api/feedback", (req, res) => {
   }
 });
 
+const commentCsvFile = path.join(__dirname, "public", "data", "comment.csv");
+
+// Append comment to comment.csv
+function appendComment(commentData) {
+  const row =
+    [
+      commentData.date || "",
+      commentData.type || "",
+      (commentData.comment || "").replace(/[\r\n]+/g, " "),
+    ]
+      .map((field) => `"${field.replace(/"/g, '""')}"`)
+      .join(",") + "\n";
+
+  if (!fs.existsSync(commentCsvFile)) {
+    const header = "date,comment-type,comment\n";
+    fs.writeFileSync(commentCsvFile, header, "utf8");
+  }
+
+  fs.appendFileSync(commentCsvFile, row, "utf8");
+}
+
+// New endpoint to handle feedback dialog
+app.post("/api/comment", (req, res) => {
+  const { type, comment } = req.body;
+
+  if (!type || !comment) {
+    return res
+      .status(400)
+      .json({ error: "Missing comment type or comment content." });
+  }
+
+  const date = new Date().toISOString().split("T")[0]; // e.g., "2025-08-08"
+
+  try {
+    appendComment({ date, type, comment });
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Failed to save comment:", err);
+    res.status(500).json({ error: "Failed to save comment." });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

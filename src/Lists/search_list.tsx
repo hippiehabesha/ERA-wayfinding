@@ -68,6 +68,13 @@ const SearchList: React.FC = () => {
 
   return (
     <div className="search-list-container">
+      <div className="back-button-search" onClick={() => navigate(-1)}>
+        <img
+          src="/Vector.svg"
+          alt="BackImage"
+          className="back-button-search-icon"
+        />
+      </div>
       <h2 className="search-list-title">Search Results</h2>
       {/* Replace A-Z filter with a search input */}
       <div style={{ marginBottom: "1.5rem", textAlign: "center" }}>
