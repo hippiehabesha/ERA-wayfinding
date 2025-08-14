@@ -17,7 +17,7 @@ body {
   height: 100%;
   background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
   justify-content: flex-start;
-  padding: 20px;
+  margin: 20px;
   overflow-x: hidden;
 }
 .back-button-department-icon {
@@ -87,6 +87,8 @@ body {
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.25), 0 1.5px 6px rgba(0, 0, 0, 0.04);
   padding: 32px 50px 28px 50px;
   margin-bottom: 48px;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 .department-list-ul {
   list-style: none;

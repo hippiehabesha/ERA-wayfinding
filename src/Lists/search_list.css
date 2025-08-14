@@ -16,7 +16,14 @@
   width: 100%;
   max-width: 800px;
 }
-
+.back-button-search-icon {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  margin-right: 850px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
 .search-list-title {
   text-align: center;
   margin-bottom: 30px;
