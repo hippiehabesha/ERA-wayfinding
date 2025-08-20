@@ -54,17 +54,12 @@ const Detail: React.FC = () => {
     <div className="detail-container">
       {/* Card */}
       <div className="back-button-department" onClick={() => navigate(-1)}>
-<<<<<<< HEAD
-          <img src="/Vector.svg" alt="BackImage" className="back-button-details-icon" />
-          </div>
-=======
         <img
           src="/Vector.svg"
           alt="BackImage"
           className="back-button-details-icon"
         />
       </div>
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
       <div className="detail-card">
         <img
           src="/profile_picture.jpg"
@@ -78,17 +73,12 @@ const Detail: React.FC = () => {
         <h2 className="detail-name">{data.wname}</h2>
         <p className="detail-department">{departmentText}</p>
         <p className="detail-contact" aria-label={`Contact: ${data.wcontact}`}>
-<<<<<<< HEAD
-          <img src="/Vector-phone.svg" alt="Phone Icon" className="phone-icon" />
-           {data.wcontact}
-=======
           <img
             src="/Vector-phone.svg"
             alt="Phone Icon"
             className="phone-icon"
           />
           {data.wcontact}
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
         </p>
 
         <div className="detail-destination">
@@ -98,45 +88,33 @@ const Detail: React.FC = () => {
           <div className="detail-destination-grid">
             <div>
               <p className="detail-icon" aria-label="Block">
-<<<<<<< HEAD
-              <img src="/Vector-block.svg" alt="block Icon" className="block-icon" />
-=======
                 <img
                   src="/Vector-block.svg"
                   alt="block Icon"
                   className="block-icon"
                 />
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
               </p>
               <p className="block-p">Block</p>
               <p className="detail-value">{data.block}</p>
             </div>
             <div>
               <p className="detail-icon" aria-label="Floor">
-<<<<<<< HEAD
-                <img src="/stairs.svg" alt="stairs Icon" className="stairs-icon" />
-=======
                 <img
                   src="/stairs.svg"
                   alt="stairs Icon"
                   className="stairs-icon"
                 />
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
               </p>
               <p className="block-p">Floor</p>
               <p className="detail-value">{data.floor}</p>
             </div>
             <div>
               <p className="detail-icon" aria-label="Room">
-<<<<<<< HEAD
-                <img src="/Vector-room.svg" alt="room Icon" className="room-icon" />
-=======
                 <img
                   src="/Vector-room.svg"
                   alt="room Icon"
                   className="room-icon"
                 />
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
               </p>
               <p className="block-p">Room</p>
               <p className="detail-value">{data.officeno}</p>
@@ -151,32 +129,23 @@ const Detail: React.FC = () => {
           onClick={() => setShowLocation(true)}
           className="detail-btn"
           aria-label="Show current location">
-<<<<<<< HEAD
-             <img src="/gridicons_location.svg" alt="location Icon" className="location-icon" />
-=======
           <img
             src="/gridicons_location.svg"
             alt="location Icon"
             className="location-icon"
           />
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
           CURRENT LOCATION
         </button>
         <button
           onClick={() => setShowFeedback(true)}
           className="detail-btn"
           aria-label="Leave feedback">
-<<<<<<< HEAD
-            <img src="/ic_baseline-feedback.svg" alt="feedback Icon" className="feedback-icon" />
-           FEEDBACK
-=======
           <img
             src="/ic_baseline-feedback.svg"
             alt="feedback Icon"
             className="feedback-icon"
           />
           FEEDBACK
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
         </button>
       </div>
 
@@ -207,7 +176,7 @@ const Detail: React.FC = () => {
                 right: 12,
                 background: "none",
                 border: "none",
-                fontSize: "1.2rem",
+                fontSize: "22px",
                 cursor: "pointer",
               }}
               aria-label="Close feedback"
@@ -219,7 +188,7 @@ const Detail: React.FC = () => {
               }}>
               ⨉
             </button>
-            <h3 className="detail-modal-title">Leave your feedback</h3>
+            <h3 className="detail-modal-title">Leave Your Feedback</h3>
             {feedbackSent ? (
               <>
                 <p className="detail-success-msg">
@@ -297,7 +266,7 @@ const Detail: React.FC = () => {
                         );
                       }
                     }}
-                    className="detail-btn"
+                    className="detail-btn-send"
                     aria-label="Send feedback">
                     Send
                   </button>

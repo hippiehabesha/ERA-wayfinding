@@ -82,16 +82,10 @@ const DepartmentList: React.FC = () => {
             <li
               key={idx}
               className="department-list-item"
-<<<<<<< HEAD
-              onClick={() => navigate("/detail", { state: { department: row } })}
-              style={{ cursor: "pointer" }}
-            >
-=======
               onClick={() =>
                 navigate("/detail", { state: { department: row } })
               }
               style={{ cursor: "pointer" }}>
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
               <div className="department-list-row">
                 <span className="department-list-title-label"></span>{" "}
                 {row.wtitle}
@@ -101,12 +95,7 @@ const DepartmentList: React.FC = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate("/detail", { state: { department: row } });
-<<<<<<< HEAD
-                }}
-              >
-=======
                 }}>
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
                 <img
                   src="/octicon_feed-plus-16.svg"
                   alt="Additional Info"

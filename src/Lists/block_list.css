@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-.block-list-container{
-width: 100%;
-height: 100%;
-
-=======
 .block-list-container {
   width: 100%;
   height: 100%;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
 }
 
 .block-list-bg {
@@ -29,25 +22,14 @@ height: 100%;
 .block-list-header {
   width: 100%;
   display: flex;
-<<<<<<< HEAD
-  margin-top:100px;
-=======
   margin-top: 100px;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   margin-bottom: 80px;
   align-items: center;
   justify-content: center;
   margin-right: 180px;
-<<<<<<< HEAD
- 
-}
-.back-button-icon {
-/* 
-=======
 }
 .back-button-icon {
   /* 
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   margin-right: 620px;
  margin-top: 20px;
   /* margin-bottom: 30px; 
@@ -75,11 +57,7 @@ height: 100%;
   padding: 20px 20px;
   background: #ffffff;
   color: #222;
-<<<<<<< HEAD
-  border: 2px solid #EF842D;
-=======
   border: 2px solid #ef842d;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   border-radius: 16px;
   cursor: pointer;
   font-weight: medium;
@@ -94,11 +72,7 @@ height: 100%;
 
 .block-list-btn:hover,
 .block-list-btn.active {
-<<<<<<< HEAD
-  background: #EF842D;
-=======
   background: #ef842d;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   color: #fff;
  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* y=5px, blur=15px, dark color */
 }
@@ -119,11 +93,7 @@ height: 100%;
   text-align: center;
   margin-bottom: 50px;
   font-size: 30px;
-<<<<<<< HEAD
- font-family: 'Roboto', sans-serif;
-=======
   font-family: "Roboto", sans-serif;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   color: #222222;
   letter-spacing: 0.5px;
   display: flex;
@@ -149,11 +119,7 @@ height: 100%;
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
   font-size: 28px;
-<<<<<<< HEAD
-  font-family: 'Roboto', sans-serif;
-=======
   font-family: "Roboto", sans-serif;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   border-radius: 16px;
@@ -200,11 +166,7 @@ height: 100%;
 .block-list-loading,
 .block-list-error {
   text-align: center;
-<<<<<<< HEAD
-  color: #EF842D;
-=======
   color: #ef842d;
->>>>>>> d7f50b74f9f3f7f60ff5cad80afc20871c902c5e
   font-size: 1.08rem;
   padding: 18px 0;
 }
