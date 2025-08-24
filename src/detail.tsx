@@ -176,7 +176,7 @@ const Detail: React.FC = () => {
                 right: 12,
                 background: "none",
                 border: "none",
-                fontSize: "1.2rem",
+                fontSize: "22px",
                 cursor: "pointer",
               }}
               aria-label="Close feedback"
@@ -188,7 +188,7 @@ const Detail: React.FC = () => {
               }}>
               ⨉
             </button>
-            <h3 className="detail-modal-title">Leave your feedback</h3>
+            <h3 className="detail-modal-title">Leave Your Feedback</h3>
             {feedbackSent ? (
               <>
                 <p className="detail-success-msg">
@@ -266,7 +266,7 @@ const Detail: React.FC = () => {
                         );
                       }
                     }}
-                    className="detail-btn"
+                    className="detail-btn-send"
                     aria-label="Send feedback">
                     Send
                   </button>

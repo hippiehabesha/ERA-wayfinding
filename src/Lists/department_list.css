@@ -77,6 +77,7 @@ body {
   font-size: 1rem;
   background: var(--orange-light);
   color: var(--orange-dark);
+  font-family: "Roboto", sans-serif;
 }
 .department-list-card {
   /* width: 100%; */
@@ -157,23 +158,29 @@ body {
   scroll-behavior: smooth;
   padding-bottom: 10px;
 }
+
 .department-list-category-filter::-webkit-scrollbar {
   height: 10px;
 }
 
 .department-list-category-filter::-webkit-scrollbar-thumb {
-  background: var(--orange-dark);
+  background: #ef842d;
   border-radius: 16px;
 }
 
 .department-list-category-btn {
-  padding: 20px 20px;
+  align-items: center;
+  margin: 0;
+  padding: 10px;
   border: 2px solid #ef842d;
   background: #ffffff;
   cursor: pointer;
   border-radius: 16px;
+  font-weight: medium;
   font-size: 26px;
   color: #222222;
+  box-shadow: 0 5px 15px rgba(239, 108, 0, 0.04);
+
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 
   flex: 0 0 calc(25% - 10px); /* show exactly 4 at a time */
@@ -192,6 +199,6 @@ body {
   animation: none;
   background: #ef842d;
   color: #fff;
+  box-shadow: 0 5px 15px rgba(239, 108, 0, 0.04);
   font-weight: bold;
-  box-shadow: 0 2px 12px rgba(255, 136, 0, 0.15);
 }
