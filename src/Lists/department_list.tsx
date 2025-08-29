@@ -1,19 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../LanguageContext";
 import "./department_list.css";
-
-function parseCSV(csv: string) {
-  const lines = csv.split("\n").filter(Boolean);
-  const headers = lines[0].split(",");
-  return lines.slice(1).map((line) => {
-    const values = line.split(",");
-    const obj: any = {};
-    headers.forEach((h, i) => {
-      obj[h.trim()] = values[i]?.trim() || "";
-    });
-    return obj;
-  });
-}
 
 const categories = [
   "Show all",
@@ -26,28 +14,43 @@ const categories = [
   "Construction Projects Management. DDG",
 ];
 
+type DataRow = {
+  block: string;
+  department_Category: string;
+  department: string;
+  departmentamh: string;
+  floor: string;
+  officeno: string;
+  wcontact: string;
+  wid: string;
+  wname: string;
+  wnameamh: string;
+  wtitle: string;
+  wtitleamh: string;
+};
+
 const DepartmentList: React.FC = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<DataRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("Show all");
+  const { language } = useLanguage();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/data.csv")
-      .then((res) => res.text())
-      .then((text) => {
-        setData(parseCSV(text));
+    fetch("/api/data")
+      .then((res) => res.json())
+      .then((json: DataRow[]) => {
+        setData(json);
         setLoading(false);
       });
   }, []);
 
-  // Filter data by selected department_category
   const filtered =
     selectedCategory === "Show all"
       ? data
       : data.filter((row) => row.department_Category === selectedCategory);
 
-  if (loading) return <div className="department-list-loading">Loading...</div>;
+  if (loading) return <div className="department-list-loading">{language === "am" ? "በመጫን ላይ..." : "Loading..."}</div>;
 
   return (
     <div className="department-list-container">
@@ -87,7 +90,7 @@ const DepartmentList: React.FC = () => {
               style={{ cursor: "pointer" }}>
               <div className="department-list-row">
                 <span className="department-list-title-label"></span>{" "}
-                {row.wtitle}
+                {language === "am" ? row.wtitleamh : row.wtitle}
               </div>
               <button
                 className="plus-btn"
@@ -108,7 +111,7 @@ const DepartmentList: React.FC = () => {
 
       {/* No results */}
       {!filtered.length && (
-        <div className="department-list-empty">No titles found.</div>
+        <div className="department-list-empty">{language === "am" ? "ምንም ማዕረግ አልተገኘም።" : "No titles found."}</div>
       )}
     </div>
   );

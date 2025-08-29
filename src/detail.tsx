@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLanguage } from "./LanguageContext";
 import "./detail.css";
 
 // Type for department/detail data
 type DetailData = {
   wname: string;
+  wnameamh: string;
   department: string;
+  departmentamh: string;
   wcontact: string;
   block: string;
   floor: string;
   officeno: string;
   wtitle?: string;
+  wtitleamh?: string;
 };
 
 const Detail: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { language } = useLanguage();
 
   // Accept both `department` and `detail` keys, fallback to null
   const data: DetailData | null =
@@ -30,25 +35,28 @@ const Detail: React.FC = () => {
   const [feedback, setFeedback] = useState("");
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackError, setFeedbackError] = useState<string | null>(null);
-  const apiURL = import.meta.env.VITE_API_URL || "";
+  const apiURL = "http://localhost:3001";
 
   if (!data)
     return (
       <div className="detail-container">
-        <p>No data found. Please go back.</p>
+        <p>{language === "am" ? "ምንም መረጃ አልተገኘም። እባክዎ ተመለሱ።" : "No data found. Please go back."}</p>
         <button onClick={() => navigate(-1)} className="detail-btn">
-          Go Back
+          {language === "am" ? "ተመለስ" : "Go Back"}
         </button>
       </div>
     );
 
-  // Fallback for department field if it's not a string
+  // Get language-appropriate text values
   const departmentText =
     typeof data.department === "string"
-      ? data.department
+      ? (language === "am" ? data.departmentamh : data.department)
       : Array.isArray(data.department)
       ? data.department.join(", ")
       : "";
+  
+  const nameText = language === "am" ? data.wnameamh : data.wname;
+  const titleText = language === "am" ? data.wtitleamh : data.wtitle;
 
   return (
     <div className="detail-container">
@@ -70,7 +78,7 @@ const Detail: React.FC = () => {
               "https://via.placeholder.com/120?text=No+Image";
           }}
         />
-        <h2 className="detail-name">{data.wname}</h2>
+        <h2 className="detail-name">{nameText}</h2>
         <p className="detail-department">{departmentText}</p>
         <p className="detail-contact" aria-label={`Contact: ${data.wcontact}`}>
           <img
@@ -83,7 +91,7 @@ const Detail: React.FC = () => {
 
         <div className="detail-destination">
           <p className="detail-destination-title">
-            Your Desired Destination is
+            {language === "am" ? "የእርስዎ የተፈለገ መድረሻ" : "Your Desired Destination is"}
           </p>
           <div className="detail-destination-grid">
             <div>
@@ -94,7 +102,7 @@ const Detail: React.FC = () => {
                   className="block-icon"
                 />
               </p>
-              <p className="block-p">Block</p>
+              <p className="block-p">{language === "am" ? "ቦሎክ" : "Block"}</p>
               <p className="detail-value">{data.block}</p>
             </div>
             <div>
@@ -105,7 +113,7 @@ const Detail: React.FC = () => {
                   className="stairs-icon"
                 />
               </p>
-              <p className="block-p">Floor</p>
+              <p className="block-p">{language === "am" ? "ፎቅ" : "Floor"}</p>
               <p className="detail-value">{data.floor}</p>
             </div>
             <div>
@@ -116,7 +124,7 @@ const Detail: React.FC = () => {
                   className="room-icon"
                 />
               </p>
-              <p className="block-p">Room</p>
+              <p className="block-p">{language === "am" ? "ክፍል" : "Room"}</p>
               <p className="detail-value">{data.officeno}</p>
             </div>
           </div>
@@ -134,7 +142,7 @@ const Detail: React.FC = () => {
             alt="location Icon"
             className="location-icon"
           />
-          CURRENT LOCATION
+          {language === "am" ? "የአሁኑ ቦታ" : "CURRENT LOCATION"}
         </button>
         <button
           onClick={() => setShowFeedback(true)}
@@ -145,7 +153,7 @@ const Detail: React.FC = () => {
             alt="feedback Icon"
             className="feedback-icon"
           />
-          FEEDBACK
+          {language === "am" ? "አስተያየት" : "FEEDBACK"}
         </button>
       </div>
 
@@ -153,12 +161,12 @@ const Detail: React.FC = () => {
       {showLocation && (
         <div className="detail-modal-overlay" role="dialog" aria-modal="true">
           <div className="detail-modal">
-            <p className="detail-modal-title">You are at work</p>
+            <p className="detail-modal-title">{language === "am" ? "በስራ ቦታዎ ነዎት" : "You are at work"}</p>
             <button
               onClick={() => setShowLocation(false)}
               className="detail-modal-back"
               aria-label="Close location dialog">
-              Back
+              {language === "am" ? "ተመለስ" : "Back"}
             </button>
           </div>
         </div>
@@ -188,11 +196,11 @@ const Detail: React.FC = () => {
               }}>
               ⨉
             </button>
-            <h3 className="detail-modal-title">Leave Your Feedback</h3>
+            <h3 className="detail-modal-title">{language === "am" ? "አስተያየትዎን ይተዉ" : "Leave Your Feedback"}</h3>
             {feedbackSent ? (
               <>
                 <p className="detail-success-msg">
-                  Thank you for your feedback!
+                  {language === "am" ? "ለአስተያየትዎ እናመሰግናለን!" : "Thank you for your feedback!"}
                 </p>
                 <button
                   style={{ marginTop: "16px" }}
@@ -204,7 +212,7 @@ const Detail: React.FC = () => {
                     setFeedbackError(null);
                   }}
                   aria-label="Back">
-                  Back
+                  {language === "am" ? "ተመለስ" : "Back"}
                 </button>
               </>
             ) : (
@@ -214,7 +222,7 @@ const Detail: React.FC = () => {
                   onChange={(e) => setFeedback(e.target.value)}
                   rows={4}
                   maxLength={800}
-                  placeholder="Write your comment (up to 800 characters)..."
+                  placeholder={language === "am" ? "አስተያየትዎን ይጻፉ (እስከ 800 ቁምፊዎች ድረስ)..." : "Write your comment (up to 800 characters)..."}
                   className="detail-textarea"
                   aria-label="Feedback text"
                 />
@@ -233,7 +241,7 @@ const Detail: React.FC = () => {
                     }}
                     className="detail-modal-back"
                     aria-label="Back">
-                    Back
+                    {language === "am" ? "ተመለስ" : "Back"}
                   </button>
                   <button
                     disabled={!feedback.trim()}
@@ -241,8 +249,8 @@ const Detail: React.FC = () => {
                       // Prepare feedback data
                       const feedbackData = {
                         department: departmentText,
-                        title: data.wtitle || "",
-                        name: data.wname,
+                        title: titleText || "",
+                        name: nameText,
                         feedback_date: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
                         feedback_text: feedback,
                       };
@@ -262,13 +270,13 @@ const Detail: React.FC = () => {
                         setFeedback("");
                       } catch (err) {
                         setFeedbackError(
-                          "Failed to send feedback. Please try again later."
+                          language === "am" ? "አስተያየት መላክ አልተቻለም። እባክዎ ደግመው ይሞክሩ።" : "Failed to send feedback. Please try again later."
                         );
                       }
                     }}
                     className="detail-btn-send"
                     aria-label="Send feedback">
-                    Send
+                    {language === "am" ? "ላክ" : "Send"}
                   </button>
                 </div>
               </>

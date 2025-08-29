@@ -9,6 +9,7 @@ import BlockList from "./Lists/block_list";
 import SearchList from "./Lists/search_list";
 import Detail from "./detail";
 import DepartmentList from "./Lists/department_list";
+import { LanguageProvider, useLanguage } from "./LanguageContext";
 import "./App.css";
 
 const backgrounds = [
@@ -22,7 +23,7 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
-  const [language, setLanguage] = useState("");
+  const { language, setLanguage } = useLanguage();
   const navigate = useNavigate();
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [feedbackType, setFeedbackType] = useState("Report");
@@ -277,15 +278,17 @@ function Home() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/list/block_list" element={<BlockList />} />
-        <Route path="/list/search" element={<SearchList />} />
-        <Route path="/list" element={<DepartmentList />} />
-        <Route path="/detail" element={<Detail />} />
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/list/block_list" element={<BlockList />} />
+          <Route path="/list/search" element={<SearchList />} />
+          <Route path="/list" element={<DepartmentList />} />
+          <Route path="/detail" element={<Detail />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 

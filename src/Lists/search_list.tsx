@@ -1,70 +1,79 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLanguage } from "../LanguageContext";
 import "./search_list.css";
 
-function parseCSV(csv: string) {
-  const lines = csv.split("\n").filter(Boolean);
-  const headers = lines[0].split(",");
-  return lines.slice(1).map((line) => {
-    const values = line.split(",");
-    const obj: any = {};
-    headers.forEach((h, i) => {
-      obj[h.trim()] = values[i]?.trim() || "";
-    });
-    return obj;
-  });
-}
+type DataRow = {
+  block: string;
+  department_Category: string;
+  department: string;
+  departmentamh: string;
+  floor: string;
+  officeno: string;
+  wcontact: string;
+  wid: string;
+  wname: string;
+  wnameamh: string;
+  wtitle: string;
+  wtitleamh: string;
+};
 
 const SearchList: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const searchTerm = location.state?.searchTerm?.toLowerCase() || "";
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<DataRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [localFilter, setLocalFilter] = useState<string>("");
 
   useEffect(() => {
-    fetch("/data.csv")
-      .then((res) => res.text())
-      .then((text) => {
-        const data = parseCSV(text);
+    fetch("/api/data")
+      .then((res) => res.json())
+      .then((data: DataRow[]) => {
         const filtered = data.filter(
-          (row) =>
-            row.department?.toLowerCase().includes(searchTerm) ||
-            row.wname?.toLowerCase().includes(searchTerm) ||
-            row.wtitle?.toLowerCase().includes(searchTerm)
+          (row) => {
+            const dept = language === "am" ? row.departmentamh : row.department;
+            const name = language === "am" ? row.wnameamh : row.wname;
+            const title = language === "am" ? row.wtitleamh : row.wtitle;
+            
+            return dept?.toLowerCase().includes(searchTerm) ||
+                   name?.toLowerCase().includes(searchTerm) ||
+                   title?.toLowerCase().includes(searchTerm);
+          }
         );
         // Sort alphabetically by department, then wname
         filtered.sort((a, b) => {
-          const depA = (a.department || "").toLowerCase();
-          const depB = (b.department || "").toLowerCase();
+          const depA = (language === "am" ? a.departmentamh : a.department || "").toLowerCase();
+          const depB = (language === "am" ? b.departmentamh : b.department || "").toLowerCase();
           if (depA < depB) return -1;
           if (depA > depB) return 1;
-          const nameA = (a.wname || "").toLowerCase();
-          const nameB = (b.wname || "").toLowerCase();
+          const nameA = (language === "am" ? a.wnameamh : a.wname || "").toLowerCase();
+          const nameB = (language === "am" ? b.wnameamh : b.wname || "").toLowerCase();
           return nameA.localeCompare(nameB);
         });
         setResults(filtered);
         setLoading(false);
       });
-  }, [searchTerm]);
+  }, [searchTerm, language]);
 
-  const handleItemClick = (row: any) => {
+  const handleItemClick = (row: DataRow) => {
     navigate("/detail", { state: { detail: row } });
   };
 
   // Filter results by local search input (case-insensitive, by name)
   const filteredResults = localFilter
     ? results.filter(
-        (row) =>
-          row.wname &&
-          row.wname.toLowerCase().includes(localFilter.toLowerCase())
+        (row) => {
+          const name = language === "am" ? row.wnameamh : row.wname;
+          return name && name.toLowerCase().includes(localFilter.toLowerCase());
+        }
       )
     : results;
 
-  if (loading) return <div className="search-list-loading">Loading...</div>;
+  if (loading) return <div className="search-list-loading">{language === "am" ? "በመጫን ላይ..." : "Loading..."}</div>;
   if (!results.length)
-    return <div className="search-list-empty">No results found.</div>;
+    return <div className="search-list-empty">{language === "am" ? "ምንም ውጤት አልተገኘም።" : "No results found."}</div>;
 
   return (
     <div className="search-list-container">
@@ -75,13 +84,13 @@ const SearchList: React.FC = () => {
           className="back-button-search-icon"
         />
       </div>
-      <h2 className="search-list-title">Search Results</h2>
+      <h2 className="search-list-title">{language === "am" ? "የፍለጋ ውጤቶች" : "Search Results"}</h2>
       {/* Replace A-Z filter with a search input */}
       <div style={{ marginBottom: "1.5rem", textAlign: "center" }}>
         <input
           type="text"
           className="search-list-search-input"
-          placeholder="Filter by name..."
+          placeholder={language === "am" ? "በስም ያጣሩ..." : "Filter by name..."}
           value={localFilter}
           onChange={(e) => setLocalFilter(e.target.value)}
           style={{
@@ -106,14 +115,14 @@ const SearchList: React.FC = () => {
               if (e.key === "Enter") handleItemClick(row);
             }}>
             <div className="search-list-row">
-              <span className="search-list-label">Department:</span>{" "}
-              {row.department}
+              <span className="search-list-label">{language === "am" ? "ዲፓርትመንት:" : "Department:"}</span>{" "}
+              {language === "am" ? row.departmentamh : row.department}
             </div>
             <div className="search-list-row">
-              <span className="search-list-label">Name:</span> {row.wname}
+              <span className="search-list-label">{language === "am" ? "ስም:" : "Name:"}</span> {language === "am" ? row.wnameamh : row.wname}
             </div>
             <div className="search-list-row">
-              <span className="search-list-label">Title:</span> {row.wtitle}
+              <span className="search-list-label">{language === "am" ? "ማዕረግ:" : "Title:"}</span> {language === "am" ? row.wtitleamh : row.wtitle}
             </div>
           </li>
         ))}

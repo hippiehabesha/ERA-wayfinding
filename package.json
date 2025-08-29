@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "better-sqlite3": "^12.2.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "next": "^15.5.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.7.1"
+    "react-router-dom": "^7.7.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
